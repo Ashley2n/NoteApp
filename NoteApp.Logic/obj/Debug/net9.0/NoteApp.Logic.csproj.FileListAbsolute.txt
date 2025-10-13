@@ -1,0 +1,5 @@
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.csproj.AssemblyReference.cache
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.AssemblyInfoInputs.cache
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.AssemblyInfo.cs
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.csproj.CoreCompileInputs.cache
