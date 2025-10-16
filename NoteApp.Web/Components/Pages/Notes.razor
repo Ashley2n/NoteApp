@@ -1,0 +1,67 @@
+﻿@page "/notes"
+@using NoteApp.Logic.Domain.Entity.Note.Models
+@inject NoteApp.Logic.Domain.Entity.Note.Service.Interface.INoteService NS
+@rendermode InteractiveServer
+
+<PageTitle>Notes Dashboard</PageTitle>
+
+
+<h3>Notes</h3>
+
+@if (_loading)
+{
+    <p>Loading</p>
+}
+else if(_notes?.Count == 0)
+{
+    <p>No Animals Yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Modified</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var a in _notes!)
+        {
+            <tr>
+                <td>@a.Title</td>
+                <td>@a.Created</td>
+                <th>@a.Modified</th>
+                <th>
+                    <button @onclick="() => EditNote(a.Id)">✏️</button>
+                    <button @onclick="() => DeleteNote(a.Id)">🗑️</button>
+                </th>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code{
+
+    private bool _loading = true;
+    private List<NoteEntity>? _notes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _notes = await NS.GetAllAsync();
+        _loading = false;
+    }
+
+    private void EditNote(int id)
+    {
+         Console.WriteLine($"Ready to Edit {id}");
+    }
+
+    private void DeleteNote(int id)
+    {
+         Console.WriteLine($"Deleting Item {id}");
+    }
+
+}

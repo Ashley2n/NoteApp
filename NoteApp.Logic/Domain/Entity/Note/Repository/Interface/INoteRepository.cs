@@ -1,16 +1,19 @@
-﻿namespace NoteApp.Domain.Entity.Note.Repository.Interface;
+﻿using NoteApp.Logic.Domain.Entity.Note.Models;
+
+namespace NoteApp.Logic.Domain.Entity.Note.Repository.Interface;
 
 public interface INoteEntityRepository
 {
-    IEnumerable<NoteEntity> GetAllNotes();
+    Task<List<NoteEntity>> GetAllNotes(CancellationToken ct = default);
     
-    NoteEntity GetNoteByID(int noteID);
+    Task<NoteEntity?> GetNoteById(int noteId, CancellationToken ct = default);
     
-    void InsertNote(NoteEntity note);
+    Task AddNote(NoteEntity note, CancellationToken ct = default);
     
-    void DeleteNote(int noteID);
+    void DeleteNote(NoteEntity note);
     
     void UpdateNote(NoteEntity note);
     
-    void Save();
+    // void GetANote( int id,  CancellationToken ct = default);
+    
 }

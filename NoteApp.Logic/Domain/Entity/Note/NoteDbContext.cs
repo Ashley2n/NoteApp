@@ -1,8 +1,11 @@
-﻿namespace NoteApp.Domain.Entity.Note;
+﻿using Microsoft.EntityFrameworkCore;
+using NoteApp.Logic.Domain.Entity.Note.Models;
 
-public sealed class NoteDbContext : DbContext
+namespace NoteApp.Logic.Domain.Entity.Note;
+
+public class NoteDbContext : DbContext
 {
-    public NoteDbContext(DbContextOptions<NoteEntity> options) : base(options) {}
+    public NoteDbContext(DbContextOptions<NoteDbContext> options) : base(options) {}
     
     public DbSet<NoteEntity> Notes { get; set; }
 

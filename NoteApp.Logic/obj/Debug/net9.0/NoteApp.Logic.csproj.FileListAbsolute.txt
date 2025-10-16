@@ -1,5 +1,15 @@
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\bin\Debug\net9.0\NoteApp.Logic.deps.json
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\bin\Debug\net9.0\NoteApp.Logic.runtimeconfig.json
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\bin\Debug\net9.0\NoteApp.Logic.dll
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\bin\Debug\net9.0\NoteApp.Logic.pdb
 C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.csproj.AssemblyReference.cache
 C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.AssemblyInfoInputs.cache
 C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.AssemblyInfo.cs
 C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.csproj.CoreCompileInputs.cache
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.sourcelink.json
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.dll
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\refint\NoteApp.Logic.dll
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.pdb
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\NoteApp.Logic.genruntimeconfig.cache
+C:\Users\awind\Documents\Advance C#\NoteApp\NoteApp.Logic\obj\Debug\net9.0\ref\NoteApp.Logic.dll

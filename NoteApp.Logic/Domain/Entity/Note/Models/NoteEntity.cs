@@ -1,4 +1,4 @@
-﻿namespace NoteApp.Domain.Enities.Models;
+﻿namespace NoteApp.Logic.Domain.Entity.Note.Models;
 
 public class NoteEntity
 {

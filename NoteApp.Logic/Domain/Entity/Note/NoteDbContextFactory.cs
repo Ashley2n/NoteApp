@@ -1,6 +1,11 @@
-﻿namespace DefaultNamespace;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using NoteApp.Logic.Domain.Entity.Note;
+using NoteApp.Logic.Domain.Entity.Note.Models;
 
-public class NoteDbContextFactory :IDesignTimeDbContextFactory<NoteEntity>
+namespace NoteApp.Logic.Domain.Entity.Note;
+
+public sealed class NoteDbContextFactory :IDesignTimeDbContextFactory<NoteDbContext>
 {
     public NoteDbContext CreateDbContext(string[] args)
     {

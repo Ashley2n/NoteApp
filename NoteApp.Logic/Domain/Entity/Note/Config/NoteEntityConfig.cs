@@ -1,9 +1,9 @@
 ﻿
-using NoteApp.Domain.Entity.Models;
+using NoteApp.Logic.Domain.Entity.Note.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace NoteApp.Domain.Entity.Note.Config;
+namespace NoteApp.Logic.Domain.Entity.Note.Config;
 public sealed class NoteEntityConfig
 {
     public void Configure(EntityTypeBuilder<NoteEntity> builder)
@@ -14,11 +14,11 @@ public sealed class NoteEntityConfig
 
         // The Value is Automaticlly generated
         builder.Property(n => n.Id)
-            .VauleGeneratedOnAdd();
+            .ValueGeneratedOnAdd();
         
         // Requirement for Title
         builder.Property(n => n.Title)
             .IsRequired()
-            .HasMaxLenght(50);
+            .HasMaxLength(50);
     }
 }
