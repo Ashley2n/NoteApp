@@ -24,8 +24,6 @@ public class NoteService : INoteService
         {
             Title = title,
             Content = content,
-            Created = DateTime.Now,
-            Modified = DateTime.Now
         };
         
         await _note.AddNote(entity, ct);
