@@ -24,32 +24,37 @@ public class NoteEntityRepository : INoteEntityRepository
             .FirstOrDefaultAsync(n => n.Id == noteId, ct);
     }
 
-    public Task AddNote(NoteEntity note, CancellationToken ct = default)
-    {
-        return _context.AddAsync(note)
-            .AsTask();
+    public async Task AddAsync(NoteEntity note, CancellationToken ct = default) {
+        await _context.Notes.AddAsync(note, ct);
+        await _context.SaveChangesAsync(ct);   
     }
+        
 
-    public void DeleteNote(NoteEntity noteEntity)
+    public async Task DeleteAsync(NoteEntity noteEntity)
     {
-        var  note = _context.Notes.Find(noteEntity);
+        var note = await _context.Notes.FindAsync(noteEntity.Id);
         if (note != null)
         {
-            _context.Notes.Remove(note);
+           _context.Notes.Remove(note);
         }
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void UpdateNote(NoteEntity note)
+    public async Task UpdateAsync(NoteEntity newNote)
     {
-        var noteEntity = _context.Notes.FirstOrDefault( n => n.Id == note.Id);
+        var existingNote = await _context.Notes.FindAsync( newNote.Id );
         // Will i need the Attach()? 
-        if (noteEntity != null)
-        {
-            _context.Entry(note).State = EntityState.Modified;
-            _context.SaveChanges();
-        }
+        if (existingNote == null)  throw new Exception("Note not found");
         
+            // _context.Entry(note).State = EntityState.Modified;
+            // _context.SaveChanges();
+            
+        existingNote.Title = newNote.Title;
+        existingNote.Content = newNote.Content;
+        existingNote.Modified = DateTime.Now;
+        
+
+        await _context.SaveChangesAsync();
     }
 
     // public NoteEntity? GetANote(int noteId, CancellationToken ct = default)

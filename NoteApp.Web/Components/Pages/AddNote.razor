@@ -1,5 +1,6 @@
 ﻿@page "/add-note"
-@inject IHttpClientFactory CF
+@inject NoteApp.Logic.Domain.Entity.Note.Service.Interface.INoteService NS
+@inject NavigationManager NavigationManager
 @using System.ComponentModel.DataAnnotations
 @using System.Data
 @using System.Net.Http.Json
@@ -28,7 +29,7 @@
         <ValidationMessage For="@(() => _note.Content)"/>
     </div>
     
-    <button type="submit">Add Note</button>
+    <button type="submit" class="btn btn-primary">Add Note</button>
     
 </EditForm>
 @if (!string.IsNullOrWhiteSpace(_message))
@@ -42,14 +43,30 @@
 
     private async Task HandleSubmit()
     {
-        var client = CF.CreateClient("NoteAppAPI");
-        var res = await client.PostAsJsonAsync("api/notes", _note);
-
-        _message = res.IsSuccessStatusCode
-            ? "Note Create Successfully!"
-            : $"Failed: {(int)res.StatusCode} {res.ReasonPhrase}\n{await res.Content.ReadAsStringAsync()}";
-
-        if (res.IsSuccessStatusCode) _note = new();
+        if (!string.IsNullOrWhiteSpace(_note.Title))
+        {
+            var newNote = await NS.CreateNoteAsync(_note.Title, _note.Content);
+            
+            if (newNote.Title == _note.Title)
+            {
+                _message = "Note has successfully been Created";
+                _note = new();
+            }
+        }
+        else
+        {
+            _message = $"Note title was Empty or illegal Characters: Title({_note.Title})";
+        }
+        
+        
+        // var client = CF.CreateClient("NoteAppAPI");
+        // var res = await client.PostAsJsonAsync("api/notes", _note);
+        //
+        // _message = res.IsSuccessStatusCode
+        //     ? "Note Create Successfully!"
+        //     : $"Failed: {(int)res.StatusCode} {res.ReasonPhrase}\n{await res.Content.ReadAsStringAsync()}";
+        //
+        // if (res.IsSuccessStatusCode) _note = new();
     }
 
     public class CreateNoteDTO

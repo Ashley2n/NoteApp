@@ -20,7 +20,7 @@ builder.Services.AddHttpClient("NoteAppAPI", client =>
 builder.Services.AddDbContext<NoteDbContext>(opts =>
 {
     var cs = builder.Configuration.GetSection("Database:ConnectionString").Value
-        ?? "Data Source=note.db";
+        ?? "Data Source=../NoteApp.Logic/note.db";
     opts.UseSqlite(cs);
 });
 // Add services to the container.

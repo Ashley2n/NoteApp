@@ -8,11 +8,11 @@ public interface INoteEntityRepository
     
     Task<NoteEntity?> GetNoteById(int noteId, CancellationToken ct = default);
     
-    Task AddNote(NoteEntity note, CancellationToken ct = default);
+    Task AddAsync(NoteEntity note, CancellationToken ct = default);
     
-    void DeleteNote(NoteEntity note);
+    Task DeleteAsync(NoteEntity note);
     
-    void UpdateNote(NoteEntity note);
+    Task UpdateAsync(NoteEntity note);
     
     // void GetANote( int id,  CancellationToken ct = default);
     

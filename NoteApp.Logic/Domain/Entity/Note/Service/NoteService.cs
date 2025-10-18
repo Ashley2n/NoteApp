@@ -18,7 +18,7 @@ public class NoteService : INoteService
         return _note.GetAllNotes(ct);
     }
 
-    public async Task<NoteEntity> CreateNote(string title, string content, CancellationToken ct = default)
+    public async Task<NoteEntity> CreateNoteAsync(string title, string content, CancellationToken ct = default)
     {
         var entity = new NoteEntity
         {
@@ -26,26 +26,42 @@ public class NoteService : INoteService
             Content = content,
         };
         
-        await _note.AddNote(entity, ct);
+        await _note.AddAsync(entity, ct);
         return entity;
     }
 
-    public Task<NoteEntity?> GetByIdAsync(int id, CancellationToken ct = default)
+    public async Task<NoteEntity?> GetByIdAsync(int id, CancellationToken ct = default)
     {
-        return _note.GetNoteById(id, ct);
+        return await _note.GetNoteById(id, ct);
     }
 
-    // public async void DeleteNote(int id, CancellationToken ct = default)
-    // {
-    //     var data = _note.GetNoteById(id, ct);
-    //
-    //     var entity = CreateANoteEntity(data);
-    //     await _note.DeleteNote(entity);
-    // }
-
-    public void UpdateNote(NoteEntity note, CancellationToken ct = default)
+    public async Task DeleteNote(int id, CancellationToken ct = default)
     {
-        throw new NotImplementedException();
+        var data = await _note.GetNoteById(id, ct);
+
+        if(data != null){ 
+           await _note.DeleteAsync(data);
+        }
+
+        if ( await _note.GetNoteById(id, ct) != null)
+        {
+            throw new Exception("Note Not deleted");
+        }
+        
+    }
+
+    public async Task<NoteEntity> UpdateNote(NoteEntity newNote, CancellationToken ct = default)
+    {
+        var data = await  _note.GetNoteById(newNote.Id, ct);
+        
+        if (data is null)
+        {
+            throw new Exception("Note not found");
+        }
+        
+        await _note.UpdateAsync(newNote);
+        
+        return newNote;
     }
     
     private record NoteDto(int Id, string Title, string Content, DateTime Created, DateTime Modified);

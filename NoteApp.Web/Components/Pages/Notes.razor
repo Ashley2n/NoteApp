@@ -1,6 +1,8 @@
 ﻿@page "/notes"
+@* @inject IHttpClientFactory CF *@
 @using NoteApp.Logic.Domain.Entity.Note.Models
 @inject NoteApp.Logic.Domain.Entity.Note.Service.Interface.INoteService NS
+@inject NavigationManager Direct
 @rendermode InteractiveServer
 
 <PageTitle>Notes Dashboard</PageTitle>
@@ -30,21 +32,26 @@ else
         @foreach (var a in _notes!)
         {
             <tr>
-                <td>@a.Title</td>
+                <td><a @onclick="() => GoToDetails(a.Id)" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">@a.Title</a></td>
                 <td>@a.Created</td>
                 <th>@a.Modified</th>
                 <th>
-                    <button @onclick="() => EditNote(a.Id)">✏️</button>
-                    <button @onclick="() => DeleteNote(a.Id)">🗑️</button>
+                    <button @onclick="() => EditNote(a.Id)" title="Edit">✏️</button>
+                    <button @onclick="() => DeleteNote(a.Id)" title="Delete">🗑️</button>
                 </th>
             </tr>
         }
         </tbody>
     </table>
+    
+    @if (!string.IsNullOrWhiteSpace(_message))
+    {
+        <div class="mt-3 alert alert-primary"> @_message</div>
+    }
 }
 
 @code{
-
+    private string? _message;
     private bool _loading = true;
     private List<NoteEntity>? _notes;
 
@@ -57,11 +64,35 @@ else
     private void EditNote(int id)
     {
          Console.WriteLine($"Ready to Edit {id}");
+         // Redirect
+         Direct.NavigateTo($"/edit-note/{id}");
     }
 
-    private void DeleteNote(int id)
+    private void GoToDetails(int id)
+    {
+        Direct.NavigateTo($"/note-detail/{id}");
+    }
+
+    private async void DeleteNote(int id)
     {
          Console.WriteLine($"Deleting Item {id}");
-    }
+
+         if (await NS.GetByIdAsync(id) != null)
+         {
+             await NS.DeleteNote(id);
+             _message = $"Id {id} has successfully been deleted";
+             Console.WriteLine($"Id {id} has successfully been deleted");
+             Direct.NavigateTo(Direct.Uri, true);
+         }
+         
+          // var client = CF.CreateClient("NoteAppAPI");
+          /*var res = await NS.DeleteNote(id);
+
+          _message = res.IsSuccessStatusCode
+              ? "Note Create Successfully!"
+              : $"Failed: {(int)res.StatusCode} {res.ReasonPhrase}\n{await res.Content.ReadAsStringAsync()}";
+
+          if (res.IsSuccessStatusCode) {}//Rerender the page?;*/
+     }
 
 }

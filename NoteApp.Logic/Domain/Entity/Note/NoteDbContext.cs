@@ -9,13 +9,16 @@ public class NoteDbContext : DbContext
     
     public DbSet<NoteEntity> Notes { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder mb)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(
-            typeof(NoteEntity).Assembly,
-            n => n.Namespace != null &&
-                 n.Namespace.StartsWith("NoteApp.Domain.Entity.Note")
-            );
+        mb.Entity<NoteEntity>(n =>
+        {
+            n.HasKey(k => k.Id);
+            n.Property(p => p.Id)
+                .ValueGeneratedOnAdd();
+            n.Property(k => k.Title)
+                .IsRequired();
+        });
 
     }
 }

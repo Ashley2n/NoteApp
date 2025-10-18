@@ -49,15 +49,15 @@ public class NoteServiceTests
         var content = "Content 1";
         var note = new NoteEntity{ Id = 1, Title = title, Content = content};
         
-        _repositoryMock.Setup(r => r.AddNote(It.IsAny<NoteEntity>(), It.IsAny<CancellationToken>()));
+        _repositoryMock.Setup(r => r.AddAsync(It.IsAny<NoteEntity>(), It.IsAny<CancellationToken>()));
         
         // Act (Using the service to call actions)
-        var result = _service.CreateNote(title, content);
+        var result = _service.CreateNoteAsync(title, content);
         
         // Assert (veryfying things have worked)
         Assert.That(result.Result.Title, Is.Not.Null);
         Assert.That(result.Result.Content, Is.Not.Null);
-        _repositoryMock.Verify(r => r.AddNote(It.Is<NoteEntity>(n => n.Title == title), It.IsAny<CancellationToken>()), Times.Once());
+        _repositoryMock.Verify(r => r.AddAsync(It.Is<NoteEntity>(n => n.Title == title), It.IsAny<CancellationToken>()), Times.Once());
     }
 
     [Test]
