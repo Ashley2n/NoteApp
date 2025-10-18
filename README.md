@@ -34,8 +34,11 @@ Each note contains the following properties:
 
 1.  Clone the repository.
 2.  Navigate to the project directory in your terminal.
-3.  Run `dotnet run` to build and start the application.
-4.  Open your browser to the URL provided in the terminal (typically `https://localhost:7000` or `http://localhost:5000`).
+    * Frontend | `cd NoteApp.Web`
+    * API | `cd NoteApp.API`
+    * Test | `cd NoteApp.Test`
+4.  Run `dotnet run` to build and start the application.
+5.  Open your browser to the URL provided in the terminal (typically `https://localhost:7000` or `http://localhost:5000`).
 
 The application will automatically create the SQLite database file in your project directory on first run.
 
